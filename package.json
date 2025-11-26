@@ -1,5 +1,5 @@
 {
-  "name": "vue-vite-spa",
+  "name": "vue-toggle-spa",
   "version": "1.0.0",
   "scripts": {
     "dev": "vite",
