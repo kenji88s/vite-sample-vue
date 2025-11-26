@@ -1,53 +1,28 @@
 <template>
-  <div class="wrapper">
-    <h1>ボタンクリックで切り替え</h1>
-    <button @click="toggleView">
-      {{ showA ? 'View B に切り替え' : 'View A に切り替え' }}
-    </button>
+  <div class="container">
+    <h1>シンプル SPA（コンポーネント化）</h1>
 
-    <div class="view" v-if="showA">
-      <h2>View A</h2>
-      <p>こちらは A の画面です。</p>
-    </div>
+    <ToggleButton :isVisible="isVisible" @toggle="toggle" />
 
-    <div class="view" v-else>
-      <h2>View B</h2>
-      <p>こちらは B の画面です。</p>
-    </div>
+    <MessageBox v-if="isVisible" message="ボタンが押されました！" />
   </div>
 </template>
 
-<script>
-export default {
-  name: 'App',
-  data() {
-    return {
-      showA: true
-    }
-  },
-  methods: {
-    toggleView() {
-      this.showA = !this.showA
-    }
-  }
-}
+<script setup>
+import { ref } from "vue";
+import ToggleButton from "./components/ToggleButton.vue";
+import MessageBox from "./components/MessageBox.vue";
+
+const isVisible = ref(false);
+
+const toggle = () => {
+  isVisible.value = !isVisible.value;
+};
 </script>
 
-<style>
-.wrapper {
-  font-family: sans-serif;
-  padding: 2rem;
-}
-
-button {
-  margin-bottom: 1rem;
-  padding: .5rem 1rem;
-  cursor: pointer;
-}
-
-.view {
-  padding: 1rem;
-  border: 1px solid #ccc;
-  border-radius: .5rem;
+<style scoped>
+.container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
 }
 </style>
